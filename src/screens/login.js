@@ -1,9 +1,12 @@
 // src/screens/Home.js
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {useNavigation} from "@react-navigation/core";
 
-export default function LoginScreen({navigation}) {
-    return (
+class Login extends React.Component{
+    render() {
+        const { navigation } = this.props;
+        return(
         <View style={styles.container}>
 
 
@@ -23,12 +26,22 @@ export default function LoginScreen({navigation}) {
 
 
         </View>
+        );
+    }
 
-
-
-
-    );
 }
+
+
+
+
+
+export default function LoginScreen() {
+    const navigation = useNavigation();
+    return <Login navigation={navigation} />;
+}
+
+
+
 
 const styles = StyleSheet.create({
     container: {
