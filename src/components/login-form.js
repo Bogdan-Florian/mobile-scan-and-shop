@@ -1,34 +1,19 @@
-import React, { useState } from "react";
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button } from "react-native";
+import {useNavigation} from "@react-navigation/core";
+import React, {useState} from "react";
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 
-
-function RegisterForm() {
-    const [name, setName] = useState("");
+function LoginForm() {
+    const [name, setName] =  ("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
-
-            <TextInput
-                value={name}
-                onChangeText={(name) => setName(name)}
-                placeholder={'Name'}
-                style={styles.input}
-            />
-
 
             <TextInput
                 value={username}
                 onChangeText={(username) => setUsername(username)}
                 placeholder={'Username'}
-                style={styles.input}
-            />
-
-            <TextInput
-                value={email}
-                onChangeText={(email) => setEmail(email)}
-                placeholder={'Email Address'}
                 style={styles.input}
             />
 
@@ -42,19 +27,24 @@ function RegisterForm() {
 
             <TouchableOpacity
                 style={styles.button}
-                >
-                <Text>Register now</Text>
+            >
+                <Text>Login</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => navigation.navigate('Register')}
+            >
+                <Text>Register</Text>
+
+
+
             </TouchableOpacity>
 
 
         </View>
-
     );
 }
-
-
-export default RegisterForm;
-
 const styles = StyleSheet.create({
     container: {
         marginTop:300,  //fix this
@@ -76,6 +66,9 @@ const styles = StyleSheet.create({
         backgroundColor: "#23a5c7",
         padding: 10,
         width:200,
-        height:44
+        height:44,
+        marginBottom: 50,
     },
 });
+
+export default LoginForm

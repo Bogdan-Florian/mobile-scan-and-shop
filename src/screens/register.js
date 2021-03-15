@@ -4,16 +4,17 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from "@react-navigation/core";
 import RegisterForm from '../components/register-form'
 class Register extends React.Component{
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            count: 0
+        };
+    }
+        render() {
         const { navigation } = this.props;
         return(
-            <View style={styles.container}>
-
-                <RegisterForm>
-
-                </RegisterForm>
-
-                {/*<Text style={styles.text}>Register Screen</Text>*/}
+            <View>
+                <RegisterForm> </RegisterForm>
             </View>
         );
     }
@@ -25,16 +26,3 @@ export default function RegisterScreen() {
     return <Register navigation={navigation} />;
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#ebebeb'
-    },
-    text: {
-        color: '#333',
-        fontSize: 24,
-        fontWeight: 'bold'
-    }
-});

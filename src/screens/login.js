@@ -2,43 +2,27 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import {useNavigation} from "@react-navigation/core";
+import LoginForm from '../components/login-form'
 
 class Login extends React.Component{
     render() {
         const { navigation } = this.props;
         return(
-        <View style={styles.container}>
-
-
-
-            <Text style={styles.text}>Login Screen</Text>
-
-
-
-
-            <TouchableOpacity
-                style={styles.buttonContainer}
-                onPress={() => navigation.navigate('Register')}
-            >
-                <Text style={styles.buttonText}>Go to Register Screen</Text>
-            </TouchableOpacity>
-
-
-
+        <View>
+            <LoginForm> </LoginForm>
         </View>
         );
     }
 
 }
-
-
-
-
-
 export default function LoginScreen() {
     const navigation = useNavigation();
     return <Login navigation={navigation} />;
 }
+
+
+
+
 
 
 
