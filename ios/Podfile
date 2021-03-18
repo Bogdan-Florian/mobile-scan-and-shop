@@ -21,4 +21,6 @@ target 'myapp' do
   #  post_install do |installer|
   #    flipper_post_install(installer)
   #  end
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
 end

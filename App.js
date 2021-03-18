@@ -1,14 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import MainStackNavigator from './src/navigator/MainStackNavigator'
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import MainStackNavigator from './src/navigator/MainStackNavigator';
 
 export default function App() {
   return (
-      <MainStackNavigator/>
-      )
+    <MainStackNavigator />
+  );
 }
-
 
 // const styles = StyleSheet.create({
 //   container: {
