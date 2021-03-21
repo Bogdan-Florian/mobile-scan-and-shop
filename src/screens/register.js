@@ -15,9 +15,7 @@ class Register extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <View>
         <RegisterForm> </RegisterForm>
-      </View>
     );
   }
 }

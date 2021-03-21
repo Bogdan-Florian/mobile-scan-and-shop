@@ -101,7 +101,6 @@ function RegisterAccount(username, password, email, navigator) {
 export default RegisterForm;
 const styles = StyleSheet.create({
   container: {
-    marginTop: 300, // fix this
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -113,7 +112,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 0.5,
     borderColor: 'black',
-    marginBottom: 30,
+    marginBottom: 25,
   },
   button: {
     alignItems: 'center',

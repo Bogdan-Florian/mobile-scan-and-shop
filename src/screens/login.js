@@ -10,9 +10,7 @@ class Login extends React.Component {
   render() {
     const { navigation } = this.props;
     return (
-      <View>
         <LoginForm> </LoginForm>
-      </View>
     );
   }
 }

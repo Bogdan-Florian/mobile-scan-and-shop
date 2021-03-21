@@ -81,7 +81,7 @@ function LoginAuthentication(username, password,navigator) {
 
 function LoginAlert(response,navigator) {
   if (response.status === 'fail'){
-      Alert.alert('Login Failed','', [{ text: 'Ok' }]);
+      Alert.alert('Login Failed','Incorrect username or password', [{ text: 'Ok' }]);
 }
   else{
     navigator.navigate("Main")
@@ -94,7 +94,7 @@ function LoginAlert(response,navigator) {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 300, // fix this
+
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 200,
     height: 44,
-    marginBottom: 50,
+    marginBottom: 30,
   },
 });
 
