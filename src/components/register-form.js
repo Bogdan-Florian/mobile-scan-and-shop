@@ -3,38 +3,78 @@ import {
   Text, StyleSheet, View, TextInput, TouchableOpacity, Button, Alert, Platform
 } from 'react-native';
 import {useNavigation} from "@react-navigation/core";
+import {emailValidator, nameValidator, passwordValidator, userAlert, UserNameValidator} from "../utils/utils";
 
 function RegisterForm() {
-  const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const navigation = useNavigation();
+    const [name, setName] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const navigation = useNavigation();
+
+    const _onSignUpPressed = async () => {
+        const usernameError = UserNameValidator(username);
+        const nameError = nameValidator(name);
+        const emailError = emailValidator(email);
+        const passwordError = passwordValidator(password);
+        if (nameError || usernameError || emailError || passwordError) {
+            Alert.alert("",
+                nameError || usernameError || emailError || passwordError,
+                [{text: "OK",}],
+                {cancelable: false});
+            return;
+        }
+            await RegisterAccount(username, password, email)
+                .then(response => response.json())
+                .then(data => {
+                  if (data.status === 'success'){
+                      console.log(data)
+                      navigation.navigate("Login")
+                  }
+                  else{
+                      Alert.alert("", data,
+                          [{ text: "OK"}],
+                          { cancelable: false });}
+
+
+                }).catch(error => {
+                    Alert.alert("", "An unexpected error occured, please try later",
+                        [{ text: "OK"}],
+                        { cancelable: false })
+                });
+    }
 
     return (
     <View style={styles.container}>
 
       <TextInput
-        value={name}
+          returnKeyType="next"
+
+          value={name}
         onChangeText={(name) => setName(name)}
         placeholder="Name"
         style={styles.input}
       />
       <TextInput
-        value={username}
+          returnKeyType="next"
+
+          value={username}
         onChangeText={(username) => setUsername(username)}
         placeholder="Username"
         style={styles.input}
       />
 
       <TextInput
-        value={email}
+          returnKeyType="next"
+
+          value={email}
         onChangeText={(email) => setEmail(email)}
         placeholder="Email Address"
         style={styles.input}
       />
 
       <TextInput
+          returnKeyType="done"
         value={password}
         onChangeText={(password) => setPassword(password)}
         placeholder="password"
@@ -43,8 +83,10 @@ function RegisterForm() {
       />
 
       <TouchableOpacity
-        onPress={() => RegisterAccount(username,password,email, navigation)}
-
+        onPress={() => {
+            _onSignUpPressed()
+        }
+        }
         style={styles.button}
       >
         <Text>Register now</Text>
@@ -55,23 +97,11 @@ function RegisterForm() {
   );
 }
 
-function registrationAlert(response, navigator, success) {
-    Alert.alert(
-        "",
-        response,
-        [
-            { text: "OK", onPress: () => {
-                if (success) navigator.navigate("Login")
+// export function registrationAlert(response, navigator, success) {
 
-                }
-            }
-        ],
-        { cancelable: false }
-    );
-}
+// }
 
-function RegisterAccount(username, password, email, navigator) {
-    let success = true
+export function RegisterAccount(username, password, email) {
     return fetch('http://138.68.166.198/register',
       {
           method: 'POST',
@@ -86,16 +116,7 @@ function RegisterAccount(username, password, email, navigator) {
                   password: password,
                   email: email
               }),
-      }
-  )   .then(response => response.json())
-      .then(responseJson => {
-          registrationAlert("Account created successfully", navigator, success)
       })
-      .catch(error => {
-          success = false
-          registrationAlert("Could not create account", navigator, success)
-          console.error(error);
-      });
 }
 
 export default RegisterForm;
