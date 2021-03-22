@@ -1,9 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+
 import React from 'react';
 import LoginScreen from '../screens/login.js';
 import RegisterScreen from '../screens/register.js';
+import QrcodeScreen from '../screens/qrcodeScanner.js'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 
 import HomeScreen from "../screens/home";
 import SettingsScreen from "../screens/settings";
