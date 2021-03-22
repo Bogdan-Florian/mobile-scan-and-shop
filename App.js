@@ -1,8 +1,23 @@
 import React from 'react';
-import MainStackNavigator from './src/navigator/MainStackNavigator';
+import MainStackNavigator, {TabNavigator} from './src/navigator/MainStackNavigator';
 
-export default function App() {
-  return (
-    <MainStackNavigator />
-  );
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      signedIn: false,
+      checkedSignIn: false
+    };
+  }
+  render() {
+      return(
+          <MainStackNavigator/>
+      )
+
+
+
+
+
+    }
 }

@@ -2,7 +2,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
-import MainComponent from '../components/main-component';
+import Home from '../components/home';
 
 class Main extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class Main extends React.Component {
   render() {
     return (
       <View>
-        <MainComponent> </MainComponent>
+        <Home> </Home>
       </View>
     );
   }

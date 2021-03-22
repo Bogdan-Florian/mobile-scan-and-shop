@@ -37,7 +37,7 @@ function LoginForm() {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => navigation.navigate('Register')}
+        onPress={() => navigation.navigate('Home')}
       >
         <Text>Register</Text>
       </TouchableOpacity>
@@ -76,7 +76,7 @@ function LoginAlert(response, navigator) {
   if (response.status === 'fail') {
     Alert.alert('Login Failed', 'Incorrect username or password', [{ text: 'Ok' }]);
   } else {
-    navigator.navigate('Main');
+    navigator.navigate('Home');
   }
 }
 
