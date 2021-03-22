@@ -41,13 +41,13 @@
     "react-test-renderer": "~16.13.1"
   },
   "jest": {
-    "setupFiles": [
-      "./jestSetup.js"
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@?react-navigation)"
     ],
-
-    "preset": "react-native"
-
-
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
+    ]
   },
   "private": true,
   "proxy": "http://localhost:8080"

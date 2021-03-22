@@ -10,9 +10,7 @@ function LoginForm() {
   const [password, setPassword] = useState('');
   const navigation = useNavigation();
 
-
-
-    return (
+  return (
     <View style={styles.container}>
 
       <TextInput
@@ -32,8 +30,7 @@ function LoginForm() {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => LoginAuthentication(username,password,navigation)}
-
+        onPress={() => LoginAuthentication(username, password, navigation)}
       >
         <Text>Login</Text>
       </TouchableOpacity>
@@ -48,49 +45,40 @@ function LoginForm() {
   );
 }
 
-function LoginAuthentication(username, password,navigator) {
-  let success = true
+function LoginAuthentication(username, password, navigator) {
+  const success = true;
   return fetch('http://138.68.166.198/login',
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json'
+    {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(
+        {
+          username,
+          password,
         },
-        body: JSON.stringify(
-            {
-              username: username,
-              password: password,
-            }),
-      }
-  )   .then(response => response.json())
-      .then(responseJson => {
-        LoginAlert(responseJson,navigator)
-
-      })
-      .catch(error => {
-        let responseJson = {status: 'fail'}
-        LoginAlert(responseJson, navigator)
-        console.error(error);
-      });
-
+      ),
+    }).then((response) => response.json())
+    .then((responseJson) => {
+      LoginAlert(responseJson, navigator);
+    })
+    .catch((error) => {
+      const responseJson = { status: 'fail' };
+      LoginAlert(responseJson, navigator);
+      console.error(error);
+    });
 }
 
-
-
-function LoginAlert(response,navigator) {
-  if (response.status === 'fail'){
-      Alert.alert('Login Failed','Incorrect username or password', [{ text: 'Ok' }]);
-}
-  else{
-    navigator.navigate("Main")
+function LoginAlert(response, navigator) {
+  if (response.status === 'fail') {
+    Alert.alert('Login Failed', 'Incorrect username or password', [{ text: 'Ok' }]);
+  } else {
+    navigator.navigate('Main');
   }
-
 }
-
-
-
 
 const styles = StyleSheet.create({
   container: {

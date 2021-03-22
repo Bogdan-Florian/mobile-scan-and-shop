@@ -13,7 +13,7 @@ function MainStackNavigator() {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={LoginScreen} options={{ title: ' Welcome' }} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-          <Stack.Screen name="Main" component={MainScreen} />
+        <Stack.Screen name="Main" component={MainScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-    Text, StyleSheet, View, TextInput, TouchableOpacity, Button, Alert, Platform
+  Text, View,
 } from 'react-native';
-import {useNavigation} from "@react-navigation/core";
 
+function MainComponent() {
+  return (
+    <View>
+      <Text>
+        Welcomes
+      </Text>
 
-function MainComponent(){
-    return(
-        <View>
-            <Text>
-                Welcomes
-            </Text>
-
-
-        </View>
-    );
-
-
+    </View>
+  );
 }
 
-export default MainComponent
+export default MainComponent;

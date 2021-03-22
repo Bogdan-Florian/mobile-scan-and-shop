@@ -1,6 +1,5 @@
 // src/screens/Register.js
 import React from 'react';
-import { View } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import RegisterForm from '../components/register-form';
 
@@ -13,9 +12,8 @@ class Register extends React.Component {
   }
 
   render() {
-    const { navigation } = this.props;
     return (
-        <RegisterForm> </RegisterForm>
+      <RegisterForm> </RegisterForm>
     );
   }
 }
