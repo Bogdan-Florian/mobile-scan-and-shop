@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import LoginScreen from '../screens/login.js';
 import RegisterScreen from '../screens/register.js';
-import QrcodeScreen from '../screens/qrcodeScanner.js'
+import QrcodeScreenStack from '../screens/qrcodeScanner.js'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
@@ -18,12 +18,10 @@ const Tab = createMaterialBottomTabNavigator();
 function HomeBottomTabNavigator(){
     return(
     <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen}
-
-        />
+        <Tab.Screen name="Home" component={HomeScreen}/>
+        <Tab.Screen name="Qrcode Scanner" component={QrcodeScreenStack}/>
         <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
-
     )
 }
 

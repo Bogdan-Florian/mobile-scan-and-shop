@@ -11,12 +11,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
+import { useNavigation } from '@react-navigation/core';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function QrcodeScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-
+  const navigation = useNavigation();
   useEffect(() => {
     (async () => {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -27,6 +28,7 @@ export default function QrcodeScanner() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    navigation.navigate('Item Page', { barcode: data})
   };
 
   if (hasPermission === null) {
@@ -56,8 +58,9 @@ export default function QrcodeScanner() {
             <BarCodeScanner
               onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
               style={{
+                flex: 1,
                 height: '50%',
-                width: '50%',
+                width: '100%',
               }}
             />
           </View>
@@ -69,7 +72,6 @@ export default function QrcodeScanner() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#000',
