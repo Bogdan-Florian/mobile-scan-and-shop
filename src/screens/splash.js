@@ -1,14 +1,17 @@
 import React from 'react';
-import {
-    Text, View,
+import {View
 } from 'react-native';
 
-function SettingsScreen() {
+function LoadingSplash() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
+
+            <View>
+                Loading...
+            </View>
         </View>
+
     );
 }
 
-export default SettingsScreen;
+export default LoadingSplash;

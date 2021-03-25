@@ -11,7 +11,7 @@ export function emailValidator(email) {
 
 export function passwordValidator(password) {
   if (!password || password.length <= 0 || password === ' ') return 'Password cannot be empty.';
-  if (password.length > 1 && password.length < 5) return 'Password must be of longer length'
+  if (password.length > 1 && password.length < 5) return 'Password must be of longer length';
   return '';
 }
 
@@ -23,10 +23,4 @@ export function nameValidator(name) {
 export function UserNameValidator(username) {
   if (!username || username.length <= 1 || username === ' ') return 'Username cannot be empty.';
   return '';
-}
-
-export function userAlert(alertTitle, alertMessage) {
-  Alert.alert(alertTitle, alertMessage
-    [{ text: 'OK' }],
-  { cancelable: false });
 }

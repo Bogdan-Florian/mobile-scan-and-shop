@@ -1,14 +1,19 @@
 import React from 'react';
-import {
-  Text, View,
-} from 'react-native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import HomeScreen from "../components/home";
+import Settings from "../components/settings";
+const HomeStackDrawerNavigator = createDrawerNavigator();
 
-function HomeScreen() {
-  return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-          <Text>Home!</Text>
-      </View>
-  );
+
+function Home() {
+    return (
+        <HomeStackDrawerNavigator.Navigator>
+            <HomeStackDrawerNavigator.Screen name="Home" component={HomeScreen}/>
+            <HomeStackDrawerNavigator.Screen name="Settings" component={Settings}/>
+        </HomeStackDrawerNavigator.Navigator>
+
+
+    );
 }
 
-export default HomeScreen;
+export default Home;

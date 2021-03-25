@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Alert,
-  Linking,
   Dimensions,
-  LayoutAnimation,
   Text,
   View,
   StatusBar,
   StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { useNavigation } from '@react-navigation/core';
@@ -28,7 +24,7 @@ export default function QrcodeScanner() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     alert(`Bar code with type ${type} and data ${data} has been scanned!`);
-    navigation.navigate('Item Page', { barcode: data})
+    navigation.navigate('Item Page', { barcode: data });
   };
 
   if (hasPermission === null) {
@@ -40,33 +36,34 @@ export default function QrcodeScanner() {
 
   return (
     <View style={styles.container}>
-        {hasPermission === null ? (
-          <Text>Requesting for camera permission</Text>
-        ) : hasPermission === false ? (
-          <Text style={{ color: '#fff' }}>
-            Camera permission is not granted
-          </Text>
-        ) : (
-          <View
+      {hasPermission === null ? (
+        <Text>Requesting for camera permission</Text>
+      ) : hasPermission === false ? (
+        <Text style={{ color: '#fff' }}>
+          Camera permission is not granted
+        </Text>
+      ) : (
+        <View
+          style={{
+            backgroundColor: 'red',
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <BarCodeScanner
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
             style={{
-              backgroundColor: 'red',
-              height: Dimensions.get('window').height,
-              width: Dimensions.get('window').width,
-              alignItems: "center",
-              justifyContent: "center"
-            }}>
-            <BarCodeScanner
-              onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-              style={{
-                flex: 1,
-                height: '50%',
-                width: '100%',
-              }}
-            />
-          </View>
-        )}
-        <StatusBar hidden />
-      </View>
+              flex: 1,
+              height: '50%',
+              width: '100%',
+            }}
+          />
+        </View>
+      )}
+      <StatusBar hidden />
+    </View>
   );
 }
 
