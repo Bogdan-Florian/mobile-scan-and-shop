@@ -82,7 +82,7 @@ function RegisterForm() {
         onChangeText={(password) => setPassword(password)}
         placeholder="Password"
         placeholderTextColor="#000000"
-        secureTextEntry
+        secureTextEntry = {true}
         style={styles.input}
       />
 
@@ -137,7 +137,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignSelf: 'center',
     fontSize: 18,
-    top: -50,
     justifyContent: 'center', 
     alignItems: 'center'
     
@@ -153,8 +152,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 1,
     borderRadius: 10,
-    position: 'absolute',
-    bottom:360,
   },
   logo: {
     marginTop: 20,
