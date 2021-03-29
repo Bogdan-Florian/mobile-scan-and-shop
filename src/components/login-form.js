@@ -105,13 +105,12 @@ const styles = StyleSheet.create({
   button: {
     width: "25%",
     borderColor: '#825a19',
+    backgroundColor: '#ebc43f',
     borderWidth: 1,
     borderRadius: 10,
     marginBottom: 20,
     fontSize: 18,
-    alignSelf: 'center',
-    
-    
+    alignSelf: 'center' 
   },
   logo: {
     marginTop: 65,
