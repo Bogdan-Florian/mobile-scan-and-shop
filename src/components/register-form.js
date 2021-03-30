@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Text, StyleSheet, View, TextInput, TouchableOpacity, Alert,
+  Text, StyleSheet, View, TextInput, TouchableOpacity, Alert, Image, ImageBackground
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import {
@@ -45,12 +45,15 @@ function RegisterForm() {
 
   return (
     <View style={styles.container}>
+       <ImageBackground source={require('../components/backgroundapp.png')} style={{width: '100%', height: '100%'}}>
+        <Image source={require('../components/logo.png')} style={styles.logo} />  
 
       <TextInput
         returnKeyType="next"
         value={name}
         onChangeText={(name) => setName(name)}
         placeholder="Name"
+        placeholderTextColor="#000000"
         style={styles.input}
       />
       <TextInput
@@ -59,6 +62,7 @@ function RegisterForm() {
         value={username}
         onChangeText={(username) => setUsername(username)}
         placeholder="Username"
+        placeholderTextColor="#000000"
         style={styles.input}
       />
 
@@ -68,6 +72,7 @@ function RegisterForm() {
         value={email}
         onChangeText={(email) => setEmail(email)}
         placeholder="Email Address"
+        placeholderTextColor="#000000"
         style={styles.input}
       />
 
@@ -75,7 +80,8 @@ function RegisterForm() {
         returnKeyType="done"
         value={password}
         onChangeText={(password) => setPassword(password)}
-        placeholder="password"
+        placeholder="Password"
+        placeholderTextColor="#000000"
         secureTextEntry
         style={styles.input}
       />
@@ -88,7 +94,7 @@ function RegisterForm() {
       >
         <Text>Register now</Text>
       </TouchableOpacity>
-
+      </ImageBackground>
     </View>
 
   );
@@ -122,18 +128,38 @@ const styles = StyleSheet.create({
     backgroundColor: '#ecf0f1',
   },
   input: {
-    width: 300,
-    height: 50,
-    padding: 10,
-    borderWidth: 0.5,
-    borderColor: 'black',
-    marginBottom: 25,
+    height: 40,
+    width: "70%",
+    borderColor: '#825a19',
+    borderWidth: 1,
+    borderRadius: 10,
+    marginBottom: 10,
+    textAlign: 'center',
+    alignSelf: 'center',
+    fontSize: 18,
+    top: -50,
+    justifyContent: 'center', 
+    alignItems: 'center'
+    
   },
   button: {
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#23a5c7',
+    backgroundColor: '#ebc43f',
     padding: 10,
     width: 200,
     height: 44,
+    borderColor: '#825a19',
+    alignSelf: 'center',
+    borderWidth: 1,
+    borderRadius: 10,
+    position: 'absolute',
+    bottom:360,
   },
+  logo: {
+    marginTop: 20,
+    width: 220,
+    height: 120,
+    margin: 95,
+  }
 });
