@@ -1,15 +1,18 @@
 import { useNavigation } from '@react-navigation/core';
 import React, { useState } from 'react';
 import {
-  Alert,
-  StyleSheet, Text, TextInput, TouchableOpacity, View,
+    Alert,
+    StyleSheet, Text, TextInput, TouchableOpacity, View,
 } from 'react-native';
+import {AuthContext} from "../utils/context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 function LoginForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const navigation = useNavigation();
-
+    const { signIn } = React.useContext(AuthContext);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const navigation = useNavigation();
   return (
     <View style={styles.container}>
 
@@ -30,7 +33,19 @@ function LoginForm() {
 
       <TouchableOpacity
         style={styles.button}
-        onPress={() => LoginAuthentication(username, password, navigation)}
+        onPress={async () => {
+          const loginResult = await LoginAuthentication(username, password);
+          console.log(loginResult)
+          if(loginResult.status === 'success'){
+              signIn()
+          }
+          else{
+              Alert.alert('Error', 'Login failed', [
+                      { text: "OK", onPress: () => console.log("OK Pressed") }
+                  ],
+                  { cancelable: true });
+          }
+        }}
       >
         <Text>Login</Text>
       </TouchableOpacity>
@@ -45,8 +60,7 @@ function LoginForm() {
   );
 }
 
-function LoginAuthentication(username, password, navigator) {
-  const success = true;
+function LoginAuthentication(username, password) {
   return fetch('http://138.68.166.198/login',
     {
       method: 'POST',
@@ -62,22 +76,8 @@ function LoginAuthentication(username, password, navigator) {
         },
       ),
     }).then((response) => response.json())
-    .then((responseJson) => {
-      LoginAlert(responseJson, navigator);
-    })
-    .catch((error) => {
-      const responseJson = { status: 'fail' };
-      LoginAlert(responseJson, navigator);
-      console.error(error);
-    });
-}
-
-function LoginAlert(response, navigator) {
-  if (response.status === 'fail') {
-    Alert.alert('Login Failed', 'Incorrect username or password', [{ text: 'Ok' }]);
-  } else {
-    navigator.navigate('Main');
-  }
+    .then((responseJson) => (responseJson))
+    .catch((error) => ({ status: 'fail' }));
 }
 
 const styles = StyleSheet.create({

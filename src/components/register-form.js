@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import {
-  emailValidator, nameValidator, passwordValidator, userAlert, UserNameValidator,
+  emailValidator, nameValidator, passwordValidator, UserNameValidator,
 } from '../utils/utils';
 
 function RegisterForm() {
@@ -30,14 +30,13 @@ function RegisterForm() {
       .then((response) => response.json())
       .then((data) => {
         if (data.status === 'success') {
-          console.log("User registered successfully");
           navigation.navigate('Login');
         } else {
           Alert.alert('', data,
             [{ text: 'OK' }],
             { cancelable: false });
         }
-      }).catch((error) => {
+      }).catch(() => {
         Alert.alert('', 'An unexpected error occured, please try later',
           [{ text: 'OK' }],
           { cancelable: false });

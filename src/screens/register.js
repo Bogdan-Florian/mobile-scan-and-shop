@@ -6,9 +6,6 @@ import RegisterForm from '../components/register-form';
 class Register extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      count: 0,
-    };
   }
 
   render() {
