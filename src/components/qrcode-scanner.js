@@ -5,6 +5,7 @@ import {
   View,
   StatusBar,
   StyleSheet,
+  Alert
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import { useNavigation } from '@react-navigation/core';
@@ -23,7 +24,11 @@ export default function QrcodeScanner() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    Alert.alert("Alert Title", `Bar code with type ${type} and data ${data} has been scanned!`,
+    [
+      { text: 'OK', onPress: () => setScanned(false) },
+    ],
+    { cancelable: false });
     navigation.navigate('Item Page', { barcode: data });
   };
 
@@ -53,7 +58,7 @@ export default function QrcodeScanner() {
           }}
         >
           <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} 
             style={{
               flex: 1,
               height: '50%',

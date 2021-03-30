@@ -30,6 +30,7 @@ function LoginForm() {
         onChangeText={(password) => setPassword(password)}
         placeholder="Password"
         placeholderTextColor="#000000"
+        secureTextEntry = {true}
         style={styles.input}
       />
 
