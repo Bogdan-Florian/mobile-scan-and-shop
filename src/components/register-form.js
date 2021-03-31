@@ -45,8 +45,8 @@ function RegisterForm() {
 
   return (
     <View style={styles.container}>
-       <ImageBackground source={require('../components/backgroundapp.png')} style={{width: '100%', height: '100%'}}>
-        <Image source={require('../components/logo.png')} style={styles.logo} />  
+       <ImageBackground source={require('../resources/images/background.png')} style={{width: '100%', height: '100%'}}>
+        <Image source={require('../resources/images/logo.png')} style={styles.logo} />
 
       <TextInput
         returnKeyType="next"

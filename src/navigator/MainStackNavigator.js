@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import React from 'react';
+import React,{useState} from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import LoginScreen from '../screens/login.js';
 import RegisterScreen from '../screens/register.js';
@@ -10,14 +10,21 @@ import HomeScreen from '../screens/home';
 import {AuthContext} from "../utils/context";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingSplash from "../screens/splash";
+import { StatusBar } from 'react-native';
+
 
 const authStack = createStackNavigator();
 const Tab = createMaterialBottomTabNavigator();
 const LoadingStack = createStackNavigator()
 export const delay = ms => new Promise(res => setTimeout(res, ms));
 
+const STYLES = ['default', 'dark-content', 'light-content'];
+const TRANSITIONS = ['fade', 'slide', 'none'];
 
 function MainStackNavigator() {
+
+
+
     const [state, dispatch] = React.useReducer(
         (prevState, action) => {
             switch (action.type) {
@@ -55,6 +62,7 @@ function MainStackNavigator() {
             let userToken
             try {
                 userToken = await AsyncStorage.getItem('useToken');
+                userToken = true
                 console.log("UserToken", userToken)
             } catch (e) {
                 console.log(e)

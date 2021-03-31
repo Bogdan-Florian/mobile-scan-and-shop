@@ -14,9 +14,17 @@ function LoginForm() {
     const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, justifyContent: 'center', alignItems: 'center'}}></View>
-      <ImageBackground source={require('../components/backgroundapp.png')} style={{width: '100%', height: '100%'}}>
-      <Image source={require('../components/logo.png')} style={styles.logo} />
+      <View style={{
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+}}/>
+      <ImageBackground source={require('../resources/images/background.png')} style={{width: '100%', height: '100%'}}>
+      <Image source={require('../resources/images/logo.png')} style={styles.logo} />
       <TextInput
         value={username}
         onChangeText={(username) => setUsername(username)}
