@@ -4,11 +4,14 @@ import {
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import {StatusBar} from "expo-status-bar";
-
+import ShoppingCartOutlined from '@ant-design/icons'
 function HomeScreen({navigation}) {
-    const handleClick = () => {
+    const showDrawer = () => {
         navigation.openDrawer()
     };
+    const goToCart = () => {
+        // navigation.navigate('')
+    }
     return (
         <>
             <StatusBar hidden={true} > </StatusBar>
@@ -26,11 +29,13 @@ function HomeScreen({navigation}) {
                 <View name={"TopBar"} style={{flex:1, flexDirection:'row', alignItems:'flex-start', backgroundColor:'#007aff'}}>
 
 
-                    <AntDesign.Button  name="bars" size={35} onPress={handleClick}/>
+                    <AntDesign.Button  name="bars" size={35} onPress={showDrawer}/>
 
                     <Text style={{flexGrow:1 ,textAlign:'center', alignSelf: 'center'}}>
                         Application name
                     </Text>
+
+                    <AntDesign.Button  name="shoppingcart" size={35} onPress={goToCart}/>
 
                 </View>
             </View>
