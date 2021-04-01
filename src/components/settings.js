@@ -49,6 +49,11 @@ function Settings({navigation}) {
                 <Text>
                     Display potential settings / maybe this should be a profile page not settings
                 </Text>
+
+
+                <Button title={"Submit changes"}>
+
+                </Button>
             </View>
 
         </>
