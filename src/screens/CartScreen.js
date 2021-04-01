@@ -1,7 +1,7 @@
  import React, { Component } from 'react'
 import { Text, View, StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
-import Products from '../components/Products'
+import { CartItems } from '../components/Products'
 
 class CartScreen extends Component {
     render() {
@@ -10,7 +10,7 @@ class CartScreen extends Component {
         return (
             <View style={styles.container}>
                 {this.props.cartItems.length > 0 ?
-                    <Products
+                    <CartItems
                         onPress={this.props.removeItem}
                         products={this.props.cartItems} />
                     : <Text>No items in your cart</Text>
