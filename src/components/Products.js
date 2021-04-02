@@ -7,8 +7,9 @@ export class Products extends Component {
         console.log(products)
         return products.map((item, index) => {
             return (
-                <View key={index} style={{ padding: 20 }}>
-                    <Image source={{uri: `${item.product_image}`}} style={{ width: 51, height: 51, resizeMode: 'contain'}} /> 
+
+                <View key={index} style={{flex:1, padding: 20, backGroundColor:'blue' }}>
+                    <Image source={{uri: `${item.product_image}`}} style={{ width: 51, height: 51, resizeMode: 'contain'}} />
                     <Text>{item.description}</Text>
                     <Text>{item.price}</Text>
                     <Button onPress={() => this.props.onPress(item)} title={'Add to cart'} />
@@ -36,7 +37,7 @@ export class CartItems extends Component {
                     <Text>{item.price}</Text>
                     <Button onPress={() => this.props.onPress(item)} title={'Remove from cart'} />
                 </View>
-                
+
             )
         })
     }
@@ -51,7 +52,7 @@ export class CartItems extends Component {
             <View style={{ padding: 20 }}>
                 <Button onPress={() => console.log("post request to server")} title={'Finish Order' + ' ' + total} />
             </View>
-            
+
         )
     }
 
@@ -72,7 +73,8 @@ export class CartItems extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: 'flex-start',
+        justifyContent: 'center',
+        backgroundColor:'yellow'
     }
 });
