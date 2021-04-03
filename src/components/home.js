@@ -2,7 +2,7 @@ import React,{ Component } from 'react';
 import {
     View,StyleSheet, Text, Button, Alert, TouchableOpacity, ScrollView,
 } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign,Entypo } from '@expo/vector-icons';
 import {StatusBar} from "expo-status-bar";
 import { Products } from './Products';
 import { connect } from 'react-redux';

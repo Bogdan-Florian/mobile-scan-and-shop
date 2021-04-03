@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, Button, StyleSheet, Image} from 'react-native'
+import {Text, View, Button, StyleSheet, Image, TouchableOpacity, ImageBackground} from 'react-native'
+import { Entypo } from '@expo/vector-icons';
 
 export class Products extends Component {
 
@@ -8,12 +9,36 @@ export class Products extends Component {
         return products.map((item, index) => {
             return (
 
-                <View key={index} style={{flex:1, padding: 20, backGroundColor:'blue' }}>
-                    <Image source={{uri: `${item.product_image}`}} style={{ width: 51, height: 51, resizeMode: 'contain'}} />
-                    <Text>{item.description}</Text>
-                    <Text>{item.price}</Text>
-                    <Button onPress={() => this.props.onPress(item)} title={'Add to cart'} />
+                <View style={{display:'flex', flexDirection:'row', backgroundColor:'green', marginTop:'5%', marginLeft:'1%', marginRight:'1%'}} key={index}>
+
+
+                    <Image source={{uri: `${item.product_image}`}} style={{display:'flex', width: 100, height: 100, resizeMode: 'contain'}} />
+
+                    <View title={"Product details container"} style={{display:'flex',alignItems:'flex-start', flexDirection:'column', flexGrow:'1',justifyContent:'center',backgroundColor:'red' }}>
+                        <Text>{item.description}</Text>
+                        <Text style={{}}>{item.price}$</Text>
+
+
+
+                    </View>
+
+
+                    <View title={"Button"} style={{display:'flex', flexDirection:'', alignItems:'flex-end', backgroundColor:'hotpink'}}>
+                        <TouchableOpacity
+                            style={{alignSelf:'flex-end'}}
+                            onPress={() => this.props.onPress(item)}>
+                            <Entypo name="add-to-list" size={35} color="#007aff" />
+                        </TouchableOpacity>
+
+
+
+
+                    </View>
+
                 </View>
+
+
+
             )
         })
     }
@@ -59,12 +84,8 @@ export class CartItems extends Component {
     render() {
         return (
             <View style={styles.container}>
-            <View>
                 {this.renderProducts(this.props.products)}
-            </View>
-            <View>
                 {this.renderButton(this.props.products)}
-            </View>
             </View>
         );
     }
@@ -72,9 +93,8 @@ export class CartItems extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        backgroundColor:'yellow'
+        display:'flex',
+        flexDirection:'column',
+        backgroundColor:'yellow',
     }
 });
