@@ -8,26 +8,22 @@ export class Products extends Component {
         console.log(products)
         return products.map((item, index) => {
             return (
-
-                <View style={{display:'flex', flexDirection:'row', backgroundColor:'green', marginTop:'5%', marginLeft:'1%', marginRight:'1%'}} key={index}>
-
-
+                <View style={{display:'flex', flexDirection:'row', backgroundColor:'007aff', marginTop:'5%', marginLeft:'1%', marginRight:'1%'}} key={index}>
                     <Image source={{uri: `${item.product_image}`}} style={{display:'flex', width: 100, height: 100, resizeMode: 'contain'}} />
 
-                    <View title={"Product details container"} style={{display:'flex',alignItems:'flex-start', flexDirection:'column', flexGrow:'1',justifyContent:'center',backgroundColor:'red' }}>
-                        <Text>{item.description}</Text>
-                        <Text style={{}}>{item.price}$</Text>
-
+                    <View style={{display:'flex', alignItems:'flex-start', flexDirection:'column', flexGrow:1, justifyContent:'center'}}>
+                            <Text>{item.description}</Text>
+                            <Text style={{}}>{item.price}$</Text>
 
 
                     </View>
 
 
-                    <View title={"Button"} style={{display:'flex', flexDirection:'', alignItems:'flex-end', backgroundColor:'hotpink'}}>
+                    <View title={"Button"} style={{display:'flex', alignItems:'flex-end'}}>
                         <TouchableOpacity
                             style={{alignSelf:'flex-end'}}
                             onPress={() => this.props.onPress(item)}>
-                            <Entypo name="add-to-list" size={35} color="#007aff" />
+                            <Entypo name="add-to-list" size={35} />
                         </TouchableOpacity>
 
 
