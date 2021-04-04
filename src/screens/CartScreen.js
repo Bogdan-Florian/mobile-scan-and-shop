@@ -1,17 +1,14 @@
  import React, { Component } from 'react'
 import { Text, View, StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
-import { CartItems } from '../components/Products'
+import CartItems from '../components/Products'
 
 class CartScreen extends Component {
     render() {
-        console.log(this.props.cartItems)
-
         return (
             <View style={styles.container}>
                 {this.props.cartItems.length > 0 ?
                     <CartItems
-                        onPress={this.props.removeItem}
                         products={this.props.cartItems} />
                     : <Text>No items in your cart</Text>
                 }
@@ -21,19 +18,16 @@ class CartScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state.shop)
     return {
-        cartItems: state
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        removeItem: (product) => dispatch({ type: 'REMOVE_FROM_CART', payload: product })
+        cartItems: state.shop
     }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CartScreen);
+
+
+export default connect(mapStateToProps)(CartScreen);
 
 const styles = StyleSheet.create({
     container: {
