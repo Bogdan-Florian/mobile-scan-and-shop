@@ -13,7 +13,7 @@ const HomeStack = createStackNavigator();
 function Home() {
     return (
         <HomeStackDrawerNavigator.Navigator>
-            <HomeStackDrawerNavigator.Screen name="Home" component={HomeStackScreen}/>
+            <HomeStackDrawerNavigator.Screen name="HomeStack" component={HomeStackScreen}/>
             <HomeStackDrawerNavigator.Screen name="Settings" component={Settings}/>
         </HomeStackDrawerNavigator.Navigator>
 

@@ -23,9 +23,11 @@ class HomeScreen extends Component {
 
     load = async () => {
         try {
-            const response = await this.getItems('1000000001');
+            console.log(this.props.route.params.qrcode)
+            const response = await this.getItems(this.props.route.params.qrcode);
             const result = await response.json();
             if (response.ok) {
+                console.log(result.data)
                 this.setState({items: result.data});
             } else {
                 this.setState({errorMessage: result});

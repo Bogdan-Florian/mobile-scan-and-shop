@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/core';
 import Itempage from '../components/Itempage';
+import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
 const BASE_URL = 'http://138.68.166.198/';
 
