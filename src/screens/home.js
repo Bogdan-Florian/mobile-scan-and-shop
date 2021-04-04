@@ -3,8 +3,6 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from "../components/home";
 import Settings from "../components/settings";
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
-import ShoppingCartIcon from '../components/ShoppingCartIcon';
-import { Button } from 'react-native';
 import CartScreen from './CartScreen';
 
 const HomeStackDrawerNavigator = createDrawerNavigator();
