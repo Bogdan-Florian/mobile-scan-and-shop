@@ -6,11 +6,11 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import LoginScreen from '../screens/login.js';
 import RegisterScreen from '../screens/register.js';
 import QrcodeScreenStack from '../screens/qrcodeScanner.js';
-import HomeScreen from '../screens/home';
 import {AuthContext} from "../utils/context";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import LoadingSplash from "../screens/splash";
 import { StatusBar } from 'react-native';
+import Home from '../screens/home';
 
 
 const authStack = createStackNavigator();
@@ -102,8 +102,8 @@ function MainStackNavigator() {
                     ( state.userToken !== null ? (
                         <>
                             <Tab.Navigator>
-                                <Tab.Screen name="Home" component={HomeScreen}/>
-                                <Tab.Screen name="Qrcode Scanner" component={QrcodeScreenStack}/>
+                                <Tab.Screen name="QrCodeStack" component={QrcodeScreenStack}/>
+                                <Tab.Screen name="HomeDrawer" component={Home}/>
                             </Tab.Navigator>
                         </>
                     )

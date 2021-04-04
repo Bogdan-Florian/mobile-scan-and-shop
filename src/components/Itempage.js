@@ -1,8 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
 import InputSpinner from "react-native-input-spinner";
+import { connect } from 'react-redux';
 
-export default function Itempage({ itemDetails }) {
+
+function Itempage({ itemDetails, addItemToCart}) {
   const { data: details } = itemDetails;
   const { description } = details;
   const { price } = details;
@@ -36,7 +38,7 @@ export default function Itempage({ itemDetails }) {
                >
 
                </InputSpinner>
-            <Button title={"Add to basket"}>
+            <Button title={"Add to basket"} onPress={() => addItemToCart(itemDetails.data)}>
 
             </Button>
 
@@ -57,6 +59,15 @@ export default function Itempage({ itemDetails }) {
 
 
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addItemToCart:(product) => dispatch({type:'ADD_TO_CART',
+            payload:product})
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Itempage);
 
 const styles = StyleSheet.create({
 

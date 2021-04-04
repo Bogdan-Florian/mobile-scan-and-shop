@@ -17,7 +17,13 @@ function  ShoppingCartIcon(props) {
             bottom: 15, alignItems:'center', justifyContent:'center', zIndex:2000}}>
                 <Text>{total_items}</Text>
             </View>
-            <Ionicons onPress={() => navigation.navigate('Cart')}  name="ios-cart" size={30}/>
+            <Ionicons onPress={() => navigation.navigate('HomeDrawer',{
+        screen: 'HomeStack',
+        params: {
+           screen: 'Cart'
+        }
+       }
+     )}  name="ios-cart" size={30}/>
         </View>
 
 

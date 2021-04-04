@@ -8,13 +8,14 @@ import {
   Alert
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
-import { useNavigation } from '@react-navigation/core';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
 export default function QrcodeScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const navigation = useNavigation();
+  const route = useRoute();
   useEffect(() => {
     (async () => {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -31,10 +32,20 @@ export default function QrcodeScanner() {
     { cancelable: false });
     if(type.includes('QRCode')){
       console.log('qrcode')
-      navigation.navigate('Home', { qrcode: data });
+      navigation.navigate('HomeDrawer',{
+        screen: 'HomeStack',
+        params: {
+           screen: 'Home',
+           params: {
+              qrcode: data
+           }
+        }
+       }
+     )
     } else{
       console.log('barcode')
-      navigation.navigate('Item Page', { barcode: data });
+      navigation.navigate('Item Page', {
+        barcode: data });
     }
   };
 
