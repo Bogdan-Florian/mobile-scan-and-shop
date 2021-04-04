@@ -31,12 +31,7 @@ export default function item_page() {
   }
   if (itemDetails) {
     return (
-      <View>
-        <View>
           <Itempage itemDetails={itemDetails} />
-        </View>
-        <StatusBar />
-      </View>
     );
   }
   return (

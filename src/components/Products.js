@@ -15,22 +15,14 @@ export class Products extends Component {
                             <Text>{item.description}</Text>
                             <Text style={{}}>{item.price}$</Text>
 
-
                     </View>
-
-
                     <View title={"Button"} style={{display:'flex', alignItems:'flex-end'}}>
                         <TouchableOpacity
                             style={{alignSelf:'flex-end'}}
                             onPress={() => this.props.onPress(item)}>
                             <Entypo name="add-to-list" size={35} />
                         </TouchableOpacity>
-
-
-
-
                     </View>
-
                 </View>
 
 
