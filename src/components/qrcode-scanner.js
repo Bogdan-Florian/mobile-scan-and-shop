@@ -29,7 +29,13 @@ export default function QrcodeScanner() {
       { text: 'OK', onPress: () => setScanned(false) },
     ],
     { cancelable: false });
-    navigation.navigate('Item Page', { barcode: data });
+    if(type.includes('QRCode')){
+      console.log('qrcode')
+      navigation.navigate('Home', { qrcode: data });
+    } else{
+      console.log('barcode')
+      navigation.navigate('Item Page', { barcode: data });
+    }
   };
 
   if (hasPermission === null) {
