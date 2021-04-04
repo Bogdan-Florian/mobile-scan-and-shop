@@ -30,24 +30,30 @@ export default function QrcodeScanner() {
       { text: 'OK', onPress: () => setScanned(false) },
     ],
     { cancelable: false });
-    if(type.includes('QRCode')){
-      console.log('qrcode')
-      navigation.navigate('HomeDrawer',{
-        screen: 'HomeStack',
-        params: {
-           screen: 'Home',
-           params: {
-              qrcode: data
-           }
-        }
-       }
-     )
-    } else{
+    if (type === 256 || type === 'org.iso.QRCode' ) {
+      {
+        console.log('qrcode')
+        navigation.navigate('HomeDrawer', {
+              screen: 'HomeStack',
+              params: {
+                screen: 'Home',
+                params: {
+                  qrcode: data
+                }
+              }
+            }
+        )
+      }
+    }
+    else{
       console.log('barcode')
       navigation.navigate('Item Page', {
         barcode: data });
     }
   };
+
+
+
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;

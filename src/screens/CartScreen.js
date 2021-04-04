@@ -18,7 +18,6 @@ class CartScreen extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state.shop)
     return {
         cartItems: state.shop
     }
