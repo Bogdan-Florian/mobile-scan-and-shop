@@ -1,9 +1,41 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {Text, View, StyleSheet, Button} from 'react-native'
 import { connect } from 'react-redux'
 
 
 function CartItems(props){
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [response, setResponse] = useState(null);
+
+    async function load(){
+        try {
+            const response = await createOrder(props.cartItems);
+            const result = await response.json();
+            if (response.ok) {
+                setResponse(result);
+            } else {
+                setErrorMessage(result);
+            }
+        } catch (err) {
+            setErrorMessage(err.message);
+        }
+    }
+    async function createOrder(cart){
+        const url = 'https://genius-margin-8086.codio-box.uk/orders'
+        return await fetch(url,
+            {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: 'username',
+                    status: 'status',
+                    basket: cart
+                })
+            });
+    }
 
     function renderProducts(products){
         return products.map((item, index) => {
@@ -28,7 +60,7 @@ function CartItems(props){
         })
         return (
             <View style={{ padding: 20 }}>
-                <Button onPress={() => console.log("post request to server")} title={'Finish Order' + ' ' + total} />
+                <Button onPress={async () => await load()} title={'Finish Order' + ' ' + total} />
             </View>
 
         )
@@ -42,6 +74,12 @@ function CartItems(props){
     );
 }
 
+const mapStateToProps = (state) => {
+    return {
+        cartItems: state.shop
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         removeItem: (product) => dispatch({ type: 'REMOVE_FROM_CART', payload: product }),
@@ -49,7 +87,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(CartItems);
+export default connect(mapStateToProps, mapDispatchToProps)(CartItems);
 
 const styles = StyleSheet.create({
     container: {
