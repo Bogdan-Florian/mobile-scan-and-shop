@@ -52,6 +52,7 @@ function LoginForm() {
               AsyncStorage.setItem('username', username)
               const token = Base64.btoa(`${username}:${password}`)
               signIn(`Basic ${token}`)
+              console.log(token)
           }
           else{
               Alert.alert('Error', 'Login failed', [
@@ -72,7 +73,7 @@ function LoginForm() {
       </TouchableOpacity>
       </ImageBackground>
     </View>
-    
+
   );
 }
 
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     alignSelf: 'center',
     fontSize: 18,
-    
+
   },
   button: {
     width: "25%",
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
     fontSize: 18,
-    alignSelf: 'center' 
+    alignSelf: 'center'
   },
   logo: {
     marginTop: 65,

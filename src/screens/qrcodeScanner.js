@@ -13,9 +13,7 @@ const QrcodeScannerStack = createStackNavigator();
 
 function QrcodeScreen(){
     return (
-      <View>
         <QrcodeScanner> </QrcodeScanner>
-      </View>
     );
 }
 

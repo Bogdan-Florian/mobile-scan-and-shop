@@ -51,7 +51,7 @@ function Settings({navigation}) {
                 </Text>
 
 
-                <Button title={"Submit changes"}>
+                <Button title={"Submit changes"} onPress={signOut}>
 
                 </Button>
             </View>
