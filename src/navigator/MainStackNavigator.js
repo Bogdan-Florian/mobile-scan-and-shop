@@ -62,7 +62,6 @@ function MainStackNavigator() {
             let userToken
             try {
                 userToken = await AsyncStorage.getItem('useToken');
-                userToken = true
                 console.log("UserToken", userToken)
             } catch (e) {
                 console.log(e)
@@ -77,9 +76,9 @@ function MainStackNavigator() {
 
     const authContext = React.useMemo(
         () => ({
-            signIn: async () => {
-                AsyncStorage.setItem('userToken', JSON.stringify('success'))
-                dispatch({type: 'SIGN_IN', token: 'success'});
+            signIn: async (token) => {
+                AsyncStorage.setItem('userToken', token)
+                dispatch({type: 'SIGN_IN', token: token});
 
             },
             signOut: async () => {

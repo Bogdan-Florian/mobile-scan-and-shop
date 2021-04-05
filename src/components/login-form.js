@@ -4,6 +4,7 @@ import {
     Alert, StyleSheet, Text, TextInput, TouchableOpacity, View, Image, ImageBackground,
 } from 'react-native';
 import {AuthContext} from "../utils/context";
+import Base64 from 'Base64';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
@@ -48,7 +49,9 @@ function LoginForm() {
           const loginResult = await LoginAuthentication(username, password);
           console.log(loginResult)
           if(loginResult.status === 'success'){
-              signIn()
+              AsyncStorage.setItem('username', username)
+              const token = Base64.btoa(`${username}:${password}`)
+              signIn(`Basic ${token}`)
           }
           else{
               Alert.alert('Error', 'Login failed', [

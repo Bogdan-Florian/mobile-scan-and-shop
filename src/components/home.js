@@ -16,6 +16,7 @@ function HomeScreen({ addItemToCart }) {
     const [items, setItems] = useState(null);
     const navigation = useNavigation();
     const route = useRoute();
+    console.log(route)
     useEffect(() => {
         load();
     }, []);
