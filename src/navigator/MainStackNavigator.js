@@ -61,7 +61,7 @@ function MainStackNavigator() {
         const bootstrapAsync = async () => {
             let userToken
             try {
-                userToken = await AsyncStorage.getItem('useToken');
+                userToken = await AsyncStorage.getItem('userToken');
                 console.log("UserToken", userToken)
             } catch (e) {
                 console.log(e)

@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import { useRoute } from '@react-navigation/core';
 import Itempage from '../components/Itempage';
-import ShoppingCartIcon from '../components/ShoppingCartIcon';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BASE_URL = 'http://138.68.166.198/';
 
@@ -27,6 +27,7 @@ export default function item_page() {
         setErrorMessage(result);
       }
     } catch (err) {
+      console.log(err)
       setErrorMessage(err.message);
     }
   }
@@ -44,14 +45,14 @@ export default function item_page() {
 }
 
 async function getItem(barcode) {
-  const itemUrl = `${BASE_URL}item/${barcode}`;
+  const itemUrl = `${BASE_URL}items/${barcode}`;
+  const token = await AsyncStorage.getItem('userToken')
   return await fetch(itemUrl,
     {
       method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
+        'Authorization': token
       },
     });
 }

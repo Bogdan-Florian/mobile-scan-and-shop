@@ -7,7 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
 
-const BASE_URL = 'http://138.68.166.198/';
+const BASE_URL = 'http://138.68.166.198';
 
 function CartItems(props){
     const [errorMessage, setErrorMessage] = useState(null);
@@ -19,6 +19,7 @@ function CartItems(props){
             const result = await response_server.json();
             if (response.ok) {
                 setResponse(result);
+                cart = []
             } else {
                 setErrorMessage(result);
             }
@@ -28,19 +29,21 @@ function CartItems(props){
     }
     async function createOrder(cart){
         const url = `${BASE_URL}/orders`
-        const username = AsyncStorage.getItem('username')
+        const username = await AsyncStorage.getItem('username')
+        const token = await AsyncStorage.getItem('userToken')
+        let cart_server = cart.map((item) => {                       
+            return { id: item.id, description: item.description, qty: item.qty} 
+        })
+        console.log(cart_server)
+        const body = JSON.stringify({status: 'active', basket: cart_server})
         return await fetch(url,
             {
                 method: 'POST',
                 mode: 'cors',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Authorization': token
                 },
-                body: JSON.stringify({
-                    username: username, 
-                    status: 'status',
-                    basket: cart
-                })
+                body: body
             });
     }
 

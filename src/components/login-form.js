@@ -77,20 +77,14 @@ function LoginForm() {
 }
 
 function LoginAuthentication(username, password) {
-  return fetch('http://138.68.166.198/login',
+  const token = Base64.btoa(`${username}:${password}`)
+  return fetch('http://138.68.166.198/accounts',
     {
-      method: 'POST',
+      method: 'GET',
       mode: 'cors',
       headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(
-        {
-          username,
-          password,
-        },
-      ),
+        'Authorization': `Basic ${token}`
+      }
     }).then((response) => response.json())
     .then((responseJson) => (responseJson))
     .catch((error) => ({ status: 'fail' }));
