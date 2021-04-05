@@ -1,51 +1,44 @@
-import React,{ Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-    View,StyleSheet, Text, Button, Alert, TouchableOpacity, ScrollView,
+    View, StyleSheet, Text, ScrollView,
 } from 'react-native';
-import { AntDesign,Entypo } from '@expo/vector-icons';
-import {StatusBar} from "expo-status-bar";
-import { Products } from './Products';
+import { AntDesign } from '@expo/vector-icons';
+import { StatusBar } from "expo-status-bar";
+import Products from './Products';
 import { connect } from 'react-redux';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import ShoppingCartIcon from "./ShoppingCartIcon";
 
 const BASE_URL = 'http://138.68.166.198/';
-//
 
+function HomeScreen({ addItemToCart }) {
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [items, setItems] = useState(null);
+    const navigation = useNavigation();
+    const route = useRoute();
+    useEffect(() => {
+        load();
+    }, []);
 
-class HomeScreen extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            items: null,
-            errorMessage: null
-        };
-    }
-
-    load = async () => {
+    async function load() {
         try {
-            console.log(this.props.route.params.qrcode)
-            const response = await this.getItems(this.props.route.params.qrcode);
+            const { qrcode } = route.params;
+            const response = await getItems(qrcode);
             const result = await response.json();
             if (response.ok) {
                 console.log(result.data)
-                this.setState({items: result.data});
+                setItems(result.data);
             } else {
-                this.setState({errorMessage: result});
+                setErrorMessage(result);
+                console.log(errorMessage)
             }
         } catch (err) {
-            this.setState({errorMessage: err});
+            setErrorMessage(err.message);
         }
 
     }
 
-    renderProducts = (items) => {
-        console.log(items)
-        return (
-            <Products products={items} onPress={this.props.addItemToCart}/>
-        )
-    }
-
-    getItems = async (qrcode) => {
+    async function getItems(qrcode) {
         const itemUrl = `${BASE_URL}items/${qrcode}`;
         return await fetch(itemUrl,
             {
@@ -57,62 +50,44 @@ class HomeScreen extends Component {
                 },
             });
     }
-
-    componentDidMount() {
-        this.load()
-    }
-
-
-
-    render() {
-        return (
-            <>
-                <StatusBar hidden={true}/>
-                <View style={styles.container}>
-
-
-                    <View name={"TopBar"}
-                          style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start', backgroundColor: '#007aff'}}>
-                        <AntDesign.Button name="bars" size={35} onPress={() => {
-                            this.props.navigation.openDrawer()
-                        }}/>
-                        <Text style={{flexGrow: 1, textAlign: 'center', alignSelf: 'center'}}>
-                            Application name
+    return (
+        <>
+            <StatusBar hidden={true} />
+            <View style={styles.container}>
+                <View name={"TopBar"}
+                    style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-start', backgroundColor: '#007aff' }}>
+                    <AntDesign.Button name="bars" size={35} onPress={() => {
+                        navigation.openDrawer()
+                    }} />
+                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center' }}>
+                        Application name
                         </Text>
-                        <ShoppingCartIcon></ShoppingCartIcon>
-                    </View>
-
-
+                    <ShoppingCartIcon></ShoppingCartIcon>
                 </View>
+            </View>
 
-                <View name="ProductList" style={{flex: 6, backgroundColor: 'red'}}>
+            <View name="ProductList" style={{ flex: 6, backgroundColor: 'red' }}>
 
-                    {this.state.items === null ? <Text>Condition True</Text> :
-                        (
-                            <ScrollView>
+                {items === null ? <Text>Condition True</Text> :
+                    (
+                        <ScrollView>
 
-                                <Products products={this.state.items} onPress={this.props.addItemToCart}/>
+                            <Products products={items} onPress={addItemToCart} />
 
-                            </ScrollView>
-                        )
-
-
-                    }
-
-                </View>
-            </>
-
-
-        )
-    }
-
-
+                        </ScrollView>
+                    )
+                }
+            </View>
+        </>
+    )
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addItemToCart:(product) => dispatch({type:'ADD_TO_CART',
-            payload:product})
+        addItemToCart: (product) => dispatch({
+            type: 'ADD_TO_CART',
+            payload: product
+        })
     }
 }
 
@@ -126,4 +101,4 @@ const styles = StyleSheet.create({
         alignItems: 'flex-start',
         alignContent: 'flex-start',
     }
-  });
+});

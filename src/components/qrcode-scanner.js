@@ -15,7 +15,6 @@ export default function QrcodeScanner() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const navigation = useNavigation();
-  const route = useRoute();
   useEffect(() => {
     (async () => {
       const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -26,34 +25,32 @@ export default function QrcodeScanner() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     Alert.alert("Alert Title", `Bar code with type ${type} and data ${data} has been scanned!`,
-    [
-      { text: 'OK', onPress: () => setScanned(false) },
-    ],
-    { cancelable: false });
-    if (type === 256 || type === 'org.iso.QRCode' ) {
+      [
+        { text: 'OK', onPress: () => setScanned(false) },
+      ],
+      { cancelable: false });
+    if (type === 256 || type === 'org.iso.QRCode') {
       {
         console.log('qrcode')
         navigation.navigate('HomeDrawer', {
-              screen: 'HomeStack',
-              params: {
-                screen: 'Home',
-                params: {
-                  qrcode: data
-                }
-              }
+          screen: 'HomeStack',
+          params: {
+            screen: 'Home',
+            params: {
+              qrcode: data
             }
+          }
+        }
         )
       }
     }
-    else{
+    else {
       console.log('barcode')
       navigation.navigate('Item Page', {
-        barcode: data });
+        barcode: data
+      });
     }
   };
-
-
-
 
   if (hasPermission === null) {
     return <Text>Requesting for camera permission</Text>;
@@ -81,7 +78,7 @@ export default function QrcodeScanner() {
           }}
         >
           <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned} 
+            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
             style={{
               flex: 1,
               height: '50%',

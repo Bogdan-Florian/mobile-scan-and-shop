@@ -11,23 +11,12 @@ import ShoppingCartIcon from '../components/ShoppingCartIcon';
 
 const QrcodeScannerStack = createStackNavigator();
 
-class ScanScreen extends Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
+function QrcodeScreen(){
     return (
       <View>
         <QrcodeScanner> </QrcodeScanner>
       </View>
     );
-  }
-}
-
-function QrcodeScreen() {
-  const navigation = useNavigation();
-  return <ScanScreen navigation={navigation} />;
 }
 
 const QrcodeStackScreen = () => (

@@ -1,20 +1,18 @@
- import React, { Component } from 'react'
+ import React from 'react'
 import { Text, View, StyleSheet} from 'react-native'
 import { connect } from 'react-redux'
-import CartItems from '../components/Products'
+import CartItems from '../components/CartItems';
 
-class CartScreen extends Component {
-    render() {
-        return (
-            <View style={styles.container}>
-                {this.props.cartItems.length > 0 ?
-                    <CartItems
-                        products={this.props.cartItems} />
-                    : <Text>No items in your cart</Text>
-                }
-            </View>
-        );
-    }
+function CartScreen({ cartItems }){
+    return (
+        <View style={styles.container}>
+            {cartItems.length > 0 ?
+                <CartItems
+                    products={cartItems} />
+                : <Text>No items in your cart</Text>
+            }
+        </View>
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -22,9 +20,6 @@ const mapStateToProps = (state) => {
         cartItems: state.shop
     }
 }
-
-
-
 
 export default connect(mapStateToProps)(CartScreen);
 
