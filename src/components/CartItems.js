@@ -1,7 +1,9 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
 import {Text, View, StyleSheet, Button} from 'react-native'
 import { connect } from 'react-redux'
 
+const BASE_URL = 'http://138.68.166.198/';
 
 function CartItems(props){
     const [errorMessage, setErrorMessage] = useState(null);
@@ -9,8 +11,8 @@ function CartItems(props){
 
     async function load(){
         try {
-            const response = await createOrder(props.cartItems);
-            const result = await response.json();
+            const response_server = await createOrder(props.cartItems);
+            const result = await response_server.json();
             if (response.ok) {
                 setResponse(result);
             } else {
@@ -21,7 +23,8 @@ function CartItems(props){
         }
     }
     async function createOrder(cart){
-        const url = 'https://genius-margin-8086.codio-box.uk/orders'
+        const url = `${BASE_URL}/orders`
+        const username = AsyncStorage.getItem('username')
         return await fetch(url,
             {
                 method: 'POST',
@@ -30,7 +33,7 @@ function CartItems(props){
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    username: 'username',
+                    username: username, 
                     status: 'status',
                     basket: cart
                 })
