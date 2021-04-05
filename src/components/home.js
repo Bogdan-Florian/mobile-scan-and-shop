@@ -16,13 +16,13 @@ function HomeScreen({ addItemToCart }) {
     const [items, setItems] = useState(null);
     const navigation = useNavigation();
     const route = useRoute();
-    const { qrcode } = route.params;
     useEffect(() => {
         load();
     }, []);
 
     async function load() {
         try {
+            const { qrcode } = route.params;
             const response = await getItems(qrcode);
             const result = await response.json();
             if (response.ok) {
