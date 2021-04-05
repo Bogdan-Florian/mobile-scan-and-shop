@@ -8,6 +8,7 @@ import Products from './Products';
 import { connect } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import ShoppingCartIcon from "./ShoppingCartIcon";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BASE_URL = 'http://138.68.166.198/';
 
@@ -40,14 +41,15 @@ function HomeScreen({ addItemToCart }) {
     }
 
     async function getItems(qrcode) {
-        const itemUrl = `${BASE_URL}items/${qrcode}`;
+        const itemUrl = `${BASE_URL}stores/${qrcode}`;
+        const token = await AsyncStorage.getItem('userToken')
+        console.log(itemUrl, token)
         return await fetch(itemUrl,
             {
                 method: 'GET',
                 mode: 'cors',
                 headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json',
+                    'Authorization': token
                 },
             });
     }
