@@ -21,7 +21,8 @@ function Home() {
 
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Home" component={HomeScreen}/>
+      <HomeStack.Screen name="Home" component={HomeScreen}
+                        options={{headerShown: false}}/>
       <HomeStack.Screen name="Cart" component={CartScreen} />
     </HomeStack.Navigator>
   );

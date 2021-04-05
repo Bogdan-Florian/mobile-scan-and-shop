@@ -61,13 +61,13 @@ function HomeScreen({ addItemToCart }) {
                         navigation.openDrawer()
                     }} />
                     <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center' }}>
-                        Application name
+                        Quick Shop
                         </Text>
                     <ShoppingCartIcon></ShoppingCartIcon>
                 </View>
             </View>
 
-            <View name="ProductList" style={{ flex: 6, backgroundColor: 'red' }}>
+            <View name="ProductList" style={{ flex: 6}}>
 
                 {items === null ? <Text>Condition True</Text> :
                     (
