@@ -11,7 +11,7 @@ export default function Products(props) {
 
                     <View style={{display:'flex', alignItems:'flex-start', flexDirection:'column', flexGrow:1, justifyContent:'center'}}>
                             <Text>{item.description}</Text>
-                            <Text style={{}}>{item.price}$</Text>
+                            <Text style={{}}>£{item.price}</Text>
 
                     </View>
                     <View title={"Button"} style={{display:'flex', alignItems:'flex-end'}}>

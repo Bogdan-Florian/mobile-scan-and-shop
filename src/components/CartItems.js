@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import {Text, View, StyleSheet, Button} from 'react-native'
+import {Text, View, StyleSheet, Button, Image, TouchableOpacity} from 'react-native'
 import { connect } from 'react-redux'
+import {Entypo} from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
 
 
 function CartItems(props){
@@ -40,14 +44,44 @@ function CartItems(props){
     function renderProducts(products){
         return products.map((item, index) => {
             return (
-                <View key={index} style={{ padding: 20 }}>
-                    <Text>{item.description}</Text>
-                    <Text>{item.price}</Text>
-                    <Text>{item.qty}</Text>
-                    <Button onPress={() => props.adjustQty(item.id, item.qty + 1)} title={'+'} />
-                    <Button onPress={() => (item.qty - 1) !== 0 ? props.adjustQty(item.id, item.qty - 1) : props.removeItem(item)} title={'-'} />
-                    <Button onPress={() => props.removeItem(item)} title={'Remove from cart'} />
+                <View style={{display:'flex', flexDirection:'row', backgroundColor:'007aff', marginTop:'5%', marginLeft:'1%', marginRight:'1%'}} key={index}>
+                    <Image source={{uri: `${item.product_image}`}} style={{display:'flex', width: 100, height: 100, resizeMode: 'contain'}} />
+
+                    <View style={{display:'flex', alignItems:'flex-start', flexDirection:'column', flexGrow:1, justifyContent:'center', }}>
+                        <Text style={styles.itemDescription}>{item.description}</Text>
+                        <Text style={styles.itemPrice}>£{item.price}</Text>
+                        <Text style={styles.itemQty}>Qty: {item.qty}</Text>
+                    </View>
+                    <View title={"Button"} style={{display:'flex', alignItems:'flex-end'}}>
+                        <TouchableOpacity
+                            style={{marginTop:'50%'}}
+                            onPress={() => props.adjustQty(item.id, item.qty + 1)}>
+                            <AntDesign name="plus" size={24} color="black" />
+
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={{marginTop:'50%'}}
+                            onPress={() => (item.qty - 1) !== 0 ? props.adjustQty(item.id, item.qty - 1) : props.removeItem(item)} >
+                            <AntDesign name="minus" size={24} color="black" />
+
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{marginTop:'50%', fontFamily:'Helvetica',}}
+                            onPress={() => props.removeItem(item)} title={'Remove from cart'}>
+                        <Feather name="trash-2" size={24} color="black" />
+                        </TouchableOpacity>
+                    </View>
+
+
+
                 </View>
+
+                // <View key={index} style={{ padding: 20 }}>
+                //     <Text>{item.description}</Text>
+                //     <Text>{item.price}</Text>
+
+                // </View>
 
             )
         })
@@ -60,7 +94,14 @@ function CartItems(props){
         })
         return (
             <View style={{ padding: 20 }}>
-                <Button onPress={async () => await load()} title={'Finish Order' + ' ' + total} />
+                <TouchableOpacity style={styles.finishOrderView} onPress={async () => await load()}>
+
+                    <Text style={styles.finishOrderText}>
+                        Finish Order: £{Math.round(total * 100) / 100}
+                    </Text>
+
+                </TouchableOpacity>
+
             </View>
 
         )
@@ -93,6 +134,35 @@ const styles = StyleSheet.create({
     container: {
         display:'flex',
         flexDirection:'column',
-        backgroundColor:'yellow',
+    },
+    itemDescription:{
+        fontFamily:'Helvetica',
+        fontSize:20,
+    },
+    itemPrice:{
+        fontFamily:'Helvetica',
+        fontSize:20,
+
+
+    },
+    itemQty:{
+        fontFamily:'Helvetica',
+
+
+    },
+
+    finishOrderView:{
+        fontFamily:'Helvetica-Bold',
+        alignSelf:'center'
+
+    },
+
+    finishOrderText:{
+        fontSize:25,
+        color:'rgb(64,3,218)'
+
     }
+// <Text style={{ fontFamily: 'Montserrat', fontSize: 20 }}>Montserrat</Text>
+
+
 });
