@@ -5,6 +5,8 @@ import Settings from "../components/settings";
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import CartScreen from './CartScreen';
 import PaymentScreen from "./PaymentScreen";
+import OrdersStackScreen from './OrderStack';
+
 
 const HomeStackDrawerNavigator = createDrawerNavigator();
 const HomeStack = createStackNavigator();
@@ -16,8 +18,8 @@ function Home() {
                                              options={{ title:'Home'}}/>
             <HomeStackDrawerNavigator.Screen name="Settings" component={Settings}
                                              options={{ title:'Settings'
-                                             }}
-            />
+                                             }}/>
+            <HomeStackDrawerNavigator.Screen name="Orders" component={OrdersStackScreen}/>
         </HomeStackDrawerNavigator.Navigator>
 
 
