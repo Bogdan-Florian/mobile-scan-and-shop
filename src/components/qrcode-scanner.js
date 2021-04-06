@@ -7,6 +7,8 @@ import {
   StyleSheet,
   Alert
 } from 'react-native';
+import { Camera } from 'expo-camera';
+
 import * as Permissions from 'expo-permissions';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -22,13 +24,18 @@ export default function QrcodeScanner() {
     })();
   }, []);
 
+  let wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    Alert.alert("Alert Title", `Bar code with type ${type} and data ${data} has been scanned!`,
-      [
-        { text: 'OK', onPress: () => setScanned(false) },
-      ],
-      { cancelable: false });
+    (async () => {
+      await wait(3500);
+      console.log("set scanner to working state again")
+      setScanned(false)
+    })()
+
+
     if (type === 256 || type === 'org.iso.QRCode') {
       {
         console.log('qrcode')
@@ -60,43 +67,81 @@ export default function QrcodeScanner() {
   }
 
   return (
-    <View style={styles.container}>
+      <>
+
       {hasPermission === null ? (
+      <View name={"Permissions container"} style={styles.container}>
+
         <Text>Requesting for camera permission</Text>
       ) : hasPermission === false ? (
-        <Text style={{ color: '#fff' }}>
+        <Text style={{ color: '#ce0808' }}>
           Camera permission is not granted
         </Text>
-      ) : (
-        <View
-          style={{
-            backgroundColor: 'red',
-            height: Dimensions.get('window').height,
-            width: Dimensions.get('window').width,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <BarCodeScanner
-            onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-            style={{
-              flex: 1,
-              height: '50%',
-              width: '100%',
-            }}
-          />
-        </View>
+
+      </View>
+      )
+
+          : (
+              <View style={{ flex: 1, backgroundColor: '#fff', contentPadding: 0, padding: 0, paddingHorizontal: 0, paddingLeft: 0, paddingStart: 0, marginHorizontal: 0, marginLeft: 0, marginStart: 0 }}>
+                <Camera
+                  onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+                  style={StyleSheet.absoluteFillObject}
+                />
+                <View
+                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', opacity:0.5}}
+                >
+                </View>
+                <View
+                    style={{
+                      backgroundColor: 'rgba(0,0,0,0.5)',
+                      alignItems: 'center',
+                    }}
+                >
+                  <Text style={{ color: '#fff', fontSize: 18 }}>
+                   Scan a shop QR-code
+                  </Text>
+                  <Text style={{ color: '#fff', fontSize: 18 }}>
+                    or a product barcode to get started
+                  </Text>
+                </View>
+              </View>
+
+        // <View style={{display: 'flex',
+        //   flexDirection: 'row',
+        //   justifyContent: 'center',
+        //   backgroundColor:'red',
+        //   }}>
+        //
+        //   <Camera
+        //       onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        //       style={{
+        //         display:'flex',
+        //         flexGrow:1,
+        //         width: Dimensions.get('screen').width,
+        //         height: Dimensions.get('screen').height}}
+        //   />
+        //
+        //   {/*<BarCodeScanner*/}
+        //   {/*  onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}*/}
+        //   {/*  style={{*/}
+        //
+        //   {/*  }}*/}
+        //   {/*/>*/}
+        //
+        // </View>
+
       )}
-      <StatusBar hidden />
-    </View>
+      </>
+
+
   );
 }
-
 const styles = StyleSheet.create({
   container: {
+    display:'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#000',
+    backgroundColor: '#deb0b0',
   },
   bottomBar: {
     position: 'absolute',

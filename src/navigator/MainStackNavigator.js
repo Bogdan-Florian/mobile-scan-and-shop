@@ -61,7 +61,7 @@ function MainStackNavigator() {
         const bootstrapAsync = async () => {
             let userToken
             try {
-                userToken = await AsyncStorage.getItem('useToken');
+                userToken = await AsyncStorage.getItem('userToken');
                 console.log("UserToken", userToken)
             } catch (e) {
                 console.log(e)
@@ -100,7 +100,11 @@ function MainStackNavigator() {
 
                     ( state.userToken !== null ? (
                         <>
-                            <Tab.Navigator>
+                            <Tab.Navigator
+                                activeColor="#f0edf6"
+                                inactiveColor="#3e2465"
+                                barStyle={{ backgroundColor: '#007aff' }}
+                            >
                                 <Tab.Screen name="QrCodeStack" component={QrcodeScreenStack}/>
                                 <Tab.Screen name="HomeDrawer" component={Home}/>
                             </Tab.Navigator>

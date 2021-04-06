@@ -101,7 +101,7 @@ function RegisterForm() {
 }
 
 export function RegisterAccount(username, password, email) {
-  return fetch('http://138.68.166.198/register',
+  return fetch('http://138.68.166.198/accounts',
     {
       method: 'POST',
       mode: 'cors',
