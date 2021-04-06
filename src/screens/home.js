@@ -11,8 +11,12 @@ const HomeStack = createStackNavigator();
 function Home() {
     return (
         <HomeStackDrawerNavigator.Navigator>
-            <HomeStackDrawerNavigator.Screen name="HomeStack" component={HomeStackScreen}/>
-            <HomeStackDrawerNavigator.Screen name="Settings" component={Settings}/>
+            <HomeStackDrawerNavigator.Screen name="HomeStack" component={HomeStackScreen}
+                                             options={{ title:'Home'}}/>
+            <HomeStackDrawerNavigator.Screen name="Settings" component={Settings}
+                                             options={{ title:'Settings'
+                                             }}
+            />
         </HomeStackDrawerNavigator.Navigator>
 
 
@@ -22,8 +26,11 @@ function Home() {
 const HomeStackScreen = () => (
     <HomeStack.Navigator>
       <HomeStack.Screen name="Home" component={HomeScreen}
-                        options={{headerShown: false}}/>
+                        options={{headerShown: false,
+                        }}/>
       <HomeStack.Screen name="Cart" component={CartScreen} />
+
+
     </HomeStack.Navigator>
   );
 

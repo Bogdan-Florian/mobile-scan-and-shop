@@ -105,8 +105,14 @@ function MainStackNavigator() {
                                 inactiveColor="#3e2465"
                                 barStyle={{ backgroundColor: '#007aff' }}
                             >
-                                <Tab.Screen name="QrCodeStack" component={QrcodeScreenStack}/>
-                                <Tab.Screen name="HomeDrawer" component={Home}/>
+                                <Tab.Screen name="QrCodeStack" component={QrcodeScreenStack}
+                                            options={{title:'Scanner'
+                                            }}
+                                />
+                                <Tab.Screen name="HomeDrawer" component={Home}
+                                            options={{headerShown: false, title:'Home'
+                                            }}
+                                />
                             </Tab.Navigator>
                         </>
                     )

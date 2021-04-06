@@ -70,7 +70,7 @@ function HomeScreen({ addItemToCart }) {
                     <AntDesign.Button name="bars" size={35} onPress={() => {
                         navigation.openDrawer()
                     }} />
-                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center' }}>
+                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontFamily:'Helvetica', fontSize:'25', color:'#194492' }}>
                         Quick Shop
                         </Text>
                     <ShoppingCartIcon></ShoppingCartIcon>
@@ -79,7 +79,7 @@ function HomeScreen({ addItemToCart }) {
 
             <View name="ProductList" style={{ flex: 6}}>
 
-                {items === null ? <Text>{"Scan a QR code to display this shops items"}</Text> :
+                {items === null ? <Text style={{alignSelf:'center', justifyContent:'center'}}>{"Promotions to be displayed"}</Text> :
                     (
                         <ScrollView>
 

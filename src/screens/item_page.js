@@ -41,6 +41,7 @@ export default function item_page() {
       <Text>{errorMessage}</Text>
       <StatusBar />
     </View>
+
   );
 }
 

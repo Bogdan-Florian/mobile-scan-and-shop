@@ -19,7 +19,11 @@ function QrcodeScreen(){
 
 const QrcodeStackScreen = () => (
   <QrcodeScannerStack.Navigator>
-    <QrcodeScannerStack.Screen name="QrcodeScreen" component={QrcodeScreen} />
+    <QrcodeScannerStack.Screen name="QrcodeScreen" component={QrcodeScreen}
+    options={{
+        headerShown:false,
+    }}
+    />
     <QrcodeScannerStack.Screen name="Item Page" component={itemPage}  options={{
           headerRight: () => (
             <ShoppingCartIcon />
