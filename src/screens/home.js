@@ -4,6 +4,7 @@ import HomeScreen from "../components/home";
 import Settings from "../components/settings";
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import CartScreen from './CartScreen';
+import PaymentScreen from "./PaymentScreen";
 
 const HomeStackDrawerNavigator = createDrawerNavigator();
 const HomeStack = createStackNavigator();
@@ -29,6 +30,7 @@ const HomeStackScreen = () => (
                         options={{headerShown: false,
                         }}/>
       <HomeStack.Screen name="Cart" component={CartScreen} />
+        <HomeStack.Screen name="Payment" component={PaymentScreen} />
 
 
     </HomeStack.Navigator>

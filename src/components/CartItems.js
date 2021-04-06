@@ -6,13 +6,14 @@ import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
+import {useNavigation} from "@react-navigation/core";
 
 const BASE_URL = 'http://138.68.166.198';
 
 function CartItems(props) {
     const [errorMessage, setErrorMessage] = useState(null);
     const [response, setResponse] = useState(null);
-
+    const navigation = useNavigation()
     async function load() {
         try {
             const response_server = await createOrder(props.cartItems);
@@ -102,7 +103,16 @@ function CartItems(props) {
         })
         return (
             <View style={{ padding: 20 }}>
-                <TouchableOpacity style={styles.finishOrderView} onPress={async () => await load()}>
+                <TouchableOpacity style={styles.finishOrderView} onPress={
+
+                    () => navigation.navigate('HomeDrawer',{
+                        screen: 'HomeStack',
+                        params: {
+                            screen: 'Payment'
+                        }
+                })}>
+
+
 
                     <Text style={styles.amount}>
                         Amount total: £{total.toFixed(2)}

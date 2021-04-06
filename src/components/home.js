@@ -70,7 +70,7 @@ function HomeScreen({ addItemToCart }) {
                     <AntDesign.Button name="bars" size={35} onPress={() => {
                         navigation.openDrawer()
                     }} />
-                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontFamily:'Helvetica', fontSize:'25', color:'#194492' }}>
+                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontFamily:'Helvetica', fontSize:25, color:'#194492' }}>
                         Quick Shop
                         </Text>
                     <ShoppingCartIcon></ShoppingCartIcon>
