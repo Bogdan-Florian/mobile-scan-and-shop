@@ -29,25 +29,11 @@ function  ShoppingCartIcon(props) {
                     {total_items}
                 </Text>
                </View>
-                <Ionicons  name="ios-cart" size={40}/>
+                <Ionicons  name="ios-cart" size={40} style={{color:'#100227'}}/>
 
             </TouchableOpacity>
 
         </View>
-
-        // <View style={{padding: 5 }} >
-        //     <View style={{position:"absolute", height: 27, width: 30,
-        //     borderRadius: 15, backgroundColor: 'rgba(95,197,123,0.8)', right: 15,
-        //     bottom: 15, alignItems:'center', justifyContent:'center', zIndex:2000}}>
-        //         <Text>{total_items}</Text>
-        //     </View>
-        //
-        //
-        //
-
-        // </View>
-
-
     );
 }
 

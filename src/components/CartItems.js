@@ -64,20 +64,20 @@ function CartItems(props) {
                         <TouchableOpacity
                             style={{ marginTop: '50%' }}
                             onPress={() => props.adjustQty(item.id, item.qty + 1)}>
-                            <AntDesign name="plus" size={24} color="black" />
+                            <AntDesign name="plus" size={24} color="#4003DA" />
 
                         </TouchableOpacity>
 
                         <TouchableOpacity
                             style={{ marginTop: '50%' }}
                             onPress={() => (item.qty - 1) !== 0 ? props.adjustQty(item.id, item.qty - 1) : props.removeItem(item)} >
-                            <AntDesign name="minus" size={24} color="black" />
+                            <AntDesign name="minus" size={24} color="#4003DA" />
 
                         </TouchableOpacity>
 
                         <TouchableOpacity style={{ marginTop: '50%', fontFamily: 'Helvetica', }}
                             onPress={() => props.removeItem(item)} title={'Remove from cart'}>
-                            <Feather name="trash-2" size={24} color="black" />
+                            <Feather name="trash-2" size={24} color="#4003DA" />
                         </TouchableOpacity>
                     </View>
 
@@ -104,9 +104,15 @@ function CartItems(props) {
             <View style={{ padding: 20 }}>
                 <TouchableOpacity style={styles.finishOrderView} onPress={async () => await load()}>
 
-                    <Text style={styles.finishOrderText}>
-                        Finish Order: £{Math.round(total * 100) / 100}
+                    <Text style={styles.amount}>
+                        Amount total: £{total.toFixed(2)}
+
                     </Text>
+
+                    <Text style={styles.finishOrderText}>
+                        Tap to finish order
+                    </Text>
+
 
                 </TouchableOpacity>
 
@@ -167,7 +173,15 @@ const styles = StyleSheet.create({
 
     finishOrderText: {
         fontSize: 25,
-        color: 'rgb(64,3,218)'
+        color: 'rgb(64,3,218)',
+        alignSelf:'center'
+
+    },
+
+    amount:{
+        fontFamily: 'Helvetica',
+        alignSelf: 'center',
+        fontSize:25,
 
     }
     // <Text style={{ fontFamily: 'Montserrat', fontSize: 20 }}>Montserrat</Text>

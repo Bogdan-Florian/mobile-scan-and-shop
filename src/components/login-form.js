@@ -52,7 +52,6 @@ function LoginForm() {
               AsyncStorage.setItem('username', username)
               const token = Base64.btoa(`${username}:${password}`)
               signIn(`Basic ${token}`)
-              console.log(token)
           }
           else{
               Alert.alert('Error', 'Login failed', [

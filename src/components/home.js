@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/core';
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useIsFocused } from '@react-navigation/native'
 
 const BASE_URL = 'http://138.68.166.198/';
 
@@ -17,18 +18,25 @@ function HomeScreen({ addItemToCart }) {
     const [items, setItems] = useState(null);
     const navigation = useNavigation();
     const route = useRoute();
-    console.log(route)
-    useEffect(() => {
-        load();
-    }, []);
+    const isFocused = useIsFocused()
 
-    async function load() {
-        try {
+    useEffect(() => {
+        try{
             const { qrcode } = route.params;
+            loadItems(qrcode)
+        }
+        catch (e) {
+            console.log("User moved to home screen without scanning qrcode | ERROR:", e)
+        }
+    }, [isFocused]);
+
+
+
+    async function loadItems(qrcode) {
+        try {
             const response = await getItems(qrcode);
             const result = await response.json();
             if (response.ok) {
-                console.log(result.data)
                 setItems(result.data);
             } else {
                 setErrorMessage(result);
@@ -62,7 +70,7 @@ function HomeScreen({ addItemToCart }) {
                     <AntDesign.Button name="bars" size={35} onPress={() => {
                         navigation.openDrawer()
                     }} />
-                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center' }}>
+                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontFamily:'Helvetica', fontSize:'25', color:'#194492' }}>
                         Quick Shop
                         </Text>
                     <ShoppingCartIcon></ShoppingCartIcon>
@@ -71,7 +79,7 @@ function HomeScreen({ addItemToCart }) {
 
             <View name="ProductList" style={{ flex: 6}}>
 
-                {items === null ? <Text>Condition True</Text> :
+                {items === null ? <Text style={{alignSelf:'center', justifyContent:'center'}}>{"Promotions to be displayed"}</Text> :
                     (
                         <ScrollView>
 
