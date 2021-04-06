@@ -4,6 +4,8 @@ import HomeScreen from "../components/home";
 import Settings from "../components/settings";
 import { createStackNavigator, HeaderTitle } from '@react-navigation/stack';
 import CartScreen from './CartScreen';
+import OrdersStackScreen from './OrderStack';
+
 
 const HomeStackDrawerNavigator = createDrawerNavigator();
 const HomeStack = createStackNavigator();
@@ -12,6 +14,7 @@ function Home() {
     return (
         <HomeStackDrawerNavigator.Navigator>
             <HomeStackDrawerNavigator.Screen name="HomeStack" component={HomeStackScreen}/>
+            <HomeStackDrawerNavigator.Screen name="Orders" component={OrdersStackScreen}/>
             <HomeStackDrawerNavigator.Screen name="Settings" component={Settings}/>
         </HomeStackDrawerNavigator.Navigator>
 

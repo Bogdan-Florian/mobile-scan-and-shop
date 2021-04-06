@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View, StyleSheet, Text, ScrollView,
-} from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { StatusBar } from "expo-status-bar";
-import Products from './Products';
-import { connect } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/core';
-import ShoppingCartIcon from "./ShoppingCartIcon";
+import {Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { StatusBar } from "expo-status-bar";
+import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Orders from './Orders';
 
-const BASE_URL = 'http://138.68.166.198/';
+const BASE_URL = 'http://138.68.166.198';
 
-function HomeScreen({ addItemToCart }) {
+function OrdersScreen() {
     const [errorMessage, setErrorMessage] = useState(null);
-    const [items, setItems] = useState(null);
+    const [orders, setOrders] = useState(null);
     const navigation = useNavigation();
-    const route = useRoute();
-    console.log(route)
     useEffect(() => {
-        load();
+        loadOrders();
     }, []);
 
-    async function load() {
+    async function loadOrders() {
         try {
-            const { qrcode } = route.params;
-            const response = await getItems(qrcode);
+            const response = await getOrders();
+            console.log(response)
             const result = await response.json();
             if (response.ok) {
                 console.log(result.data)
-                setItems(result.data);
+                setOrders(result.data);
             } else {
                 setErrorMessage(result);
                 console.log(errorMessage)
@@ -40,8 +34,8 @@ function HomeScreen({ addItemToCart }) {
 
     }
 
-    async function getItems(qrcode) {
-        const itemUrl = `${BASE_URL}stores/${qrcode}`;
+    async function getOrders() {
+        const itemUrl = `${BASE_URL}/orders`;
         const token = await AsyncStorage.getItem('userToken')
         console.log(itemUrl, token)
         return await fetch(itemUrl,
@@ -53,6 +47,7 @@ function HomeScreen({ addItemToCart }) {
                 },
             });
     }
+
     return (
         <>
             <StatusBar hidden={true} />
@@ -63,19 +58,18 @@ function HomeScreen({ addItemToCart }) {
                         navigation.openDrawer()
                     }} />
                     <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center' }}>
-                            Quick Shop
+                        Application name
                         </Text>
-                    <ShoppingCartIcon></ShoppingCartIcon>
                 </View>
             </View>
 
-            <View name="ProductList" style={{ flex: 6}}>
+            <View name="OrdersList" style={{ flex: 6, backgroundColor: 'red' }}>
 
-                {items === null ? <Text>Condition True</Text> :
+                {orders === null ? <Text>Condition True</Text> :
                     (
                         <ScrollView>
 
-                            <Products products={items} onPress={addItemToCart} />
+                            <Orders orders={orders}/>
 
                         </ScrollView>
                     )
@@ -85,16 +79,7 @@ function HomeScreen({ addItemToCart }) {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItemToCart: (product) => dispatch({
-            type: 'ADD_TO_CART',
-            payload: product
-        })
-    }
-}
-
-export default connect(null, mapDispatchToProps)(HomeScreen);
+export default OrdersScreen;
 
 const styles = StyleSheet.create({
     container: {
