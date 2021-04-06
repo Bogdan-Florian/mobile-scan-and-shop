@@ -1,43 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import {
-    View, StyleSheet, Text, ScrollView,
-} from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { StatusBar } from "expo-status-bar";
-import Products from './Products';
-import { connect } from 'react-redux';
 import { useNavigation, useRoute } from '@react-navigation/core';
-import ShoppingCartIcon from "./ShoppingCartIcon";
+import {Text, View, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { StatusBar } from "expo-status-bar";
+import { AntDesign } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useIsFocused } from '@react-navigation/native'
+import Orders from './Orders';
 
-const BASE_URL = 'http://138.68.166.198/';
+const BASE_URL = 'http://138.68.166.198';
 
-function HomeScreen({ addItemToCart }) {
+function OrdersScreen() {
     const [errorMessage, setErrorMessage] = useState(null);
-    const [items, setItems] = useState(null);
+    const [orders, setOrders] = useState(null);
     const navigation = useNavigation();
-    const route = useRoute();
-    const isFocused = useIsFocused()
-
     useEffect(() => {
-        try{
-            const { qrcode } = route.params;
-            loadItems(qrcode)
-        }
-        catch (e) {
-            console.log("User moved to home screen without scanning qrcode | ERROR:", e)
-        }
-    }, [isFocused]);
+        loadOrders();
+    }, []);
 
-
-
-    async function loadItems(qrcode) {
+    async function loadOrders() {
         try {
-            const response = await getItems(qrcode);
+            const response = await getOrders();
+            console.log(response)
             const result = await response.json();
             if (response.ok) {
-                setItems(result.data);
+                console.log(result.data)
+                setOrders(result.data);
             } else {
                 setErrorMessage(result);
                 console.log(errorMessage)
@@ -48,8 +34,8 @@ function HomeScreen({ addItemToCart }) {
 
     }
 
-    async function getItems(qrcode) {
-        const itemUrl = `${BASE_URL}stores/${qrcode}`;
+    async function getOrders() {
+        const itemUrl = `${BASE_URL}/orders`;
         const token = await AsyncStorage.getItem('userToken')
         console.log(itemUrl, token)
         return await fetch(itemUrl,
@@ -61,6 +47,7 @@ function HomeScreen({ addItemToCart }) {
                 },
             });
     }
+
     return (
         <>
             <StatusBar hidden={true} />
@@ -70,20 +57,19 @@ function HomeScreen({ addItemToCart }) {
                     <AntDesign.Button name="bars" size={35} onPress={() => {
                         navigation.openDrawer()
                     }} />
-                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center', fontFamily:'Helvetica', fontSize:25, color:'#194492' }}>
-                        Quick Shop
+                    <Text style={{ flexGrow: 1, textAlign: 'center', alignSelf: 'center' }}>
+                        Application name
                         </Text>
-                    <ShoppingCartIcon></ShoppingCartIcon>
                 </View>
             </View>
 
-            <View name="ProductList" style={{ flex: 6}}>
+            <View name="OrdersList" style={{ flex: 6, backgroundColor: 'red' }}>
 
-                {items === null ? <Text style={{alignSelf:'center', justifyContent:'center'}}>{"Promotions to be displayed"}</Text> :
+                {orders === null ? <Text>Condition True</Text> :
                     (
                         <ScrollView>
 
-                            <Products products={items} onPress={addItemToCart} />
+                            <Orders orders={orders}/>
 
                         </ScrollView>
                     )
@@ -93,16 +79,7 @@ function HomeScreen({ addItemToCart }) {
     )
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addItemToCart: (product) => dispatch({
-            type: 'ADD_TO_CART',
-            payload: product
-        })
-    }
-}
-
-export default connect(null, mapDispatchToProps)(HomeScreen);
+export default OrdersScreen;
 
 const styles = StyleSheet.create({
     container: {
