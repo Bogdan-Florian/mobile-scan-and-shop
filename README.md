@@ -1,9 +1,9 @@
 
-
+This was our first try to create an Expo app with no prior experience. 
 
 # Mobile shopping scanner
 
-Expo demo application that allows users to scan in-store products.  Requires the [backend API](https://github.com/Bogdan-Florian/mobile-scan-and-shop-API) functionality to retrieve data
+Expo demo application that allows users to scan in-store products.  Requires the [API](https://github.com/Bogdan-Florian/mobile-scan-and-shop-API) functionality to retrieve data
 ## Features
 
  - Login / Registration system
